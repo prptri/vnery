@@ -2,19 +2,28 @@ const express = require("express");
 const path = require("path");
 const app = express();
 const connection = require("./db_connection");
-const exphbs = require("express-handlebars");
+//const exphbs = require("express-handlebars");
 const bodyParser = require("body-parser");
 const net = require("net");
+const pyPORT = 60000;
+const pyHOST = "10.26.250.224";
+const client = new net.Socket();
 
+client.connect(60000, "10.26.250.224", function(err, results) {
+  if (err) throw err;
+  console.log("Connected");
+  client.on("data", function(data) {
+    console.log("Received: " + data);
+    if (data == "who?") {
+      client.write("back-end");
+    }
+  });
+});
 // Body Parser Middleware
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
-app.on("listening", function(req, res) {
-  res.render("/");
-});
 
 const logger = (req, res, next) => {
   console.log("Hello");
@@ -48,25 +57,32 @@ app.get("/", function(req, res) {
 });
 
 app.post("/save", function(req, res) {
-  var screens = {};
+  //connect to python
+
+  //var screens = {};
+  var screen1 = req.body.div1;
+  var screen2 = req.body.div2;
+  //screens = { screen1, screen2 };
+  var sc1 = JSON.stringify(screen1);
+  var sc2 = JSON.stringify(screen2);
+  //var sc2 = JSON.stringify(screen2);
+  client.write(sc1);
+  console.log(screen1);
+  setTimeout(function() {
+    console.log("delay 10 sec ...");
+  }, 10000);
+  client.write(sc2);
+  console.log(screen2);
+  // console.log(screens.screen1.ip_address);
+  /*var screenlist = [];
   console.log("-------------------------------------------");
-  console.log(screens);
   console.log("-------------------------------------------");
-  console.log(req.body.div1);
-  console.log(req.body.div2);
-  console.log("req received");
-  //connect to Python Server
-  /*var client = new net.Socket();
-  client.connect(60000, "10.26.250.224", function(err, results) {
-    if (err) throw err;
-    console.log("Connected");
-    client.on("data", function(data) {
-      console.log("Received: " + data);
-      client.write("back-end");
-      //sent(JSON object) to python server
-      client.emit;
-    });
-  });*/
+  console.log("req received!");
+  screenlist.push(JSON.stringify(req.body.div1));
+  screenlist.push(req.body.div2);
+  console.log(screenlist[0]);*/
+  //sent(JSON object) to python server
+
   //still redirect main.
   res.redirect("/main");
 });
