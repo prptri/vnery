@@ -1,0 +1,133 @@
+.wrapper {
+  overflow: hidden;
+  display: block;
+  width: 100%;
+}
+
+#mydiv {
+  display: none;
+  position: absolute;
+  width: 100px;
+  color: white;
+  height: 200px;
+  padding: 40px;
+  border: 5px solid black;
+}
+
+#mydiv1 {
+  display: none;
+  position: absolute;
+  width: px;
+  height: px;
+  padding: 40px;
+  border: 5px solid black;
+  top: 200px;
+  left: 600px;
+}
+#mydiv2 {
+  display: none;
+  position: absolute;
+  width: px;
+  height: px;
+  padding: 40px;
+  border: 5px solid black;
+  top: 200px;
+  left: 600px;
+}
+#mydiv3 {
+  display: none;
+  position: absolute;
+  width: px;
+  height: px;
+  padding: 40px;
+  border: 5px solid black;
+  top: 200px;
+  left: 600px;
+}
+#mydiv4 {
+  display: none;
+  position: absolute;
+  width: px;
+  height: px;
+  padding: 40px;
+  border: 5px solid black;
+  top: 200px;
+  left: 600px;
+}
+#mydiv5 {
+  display: none;
+  position: absolute;
+  width: px;
+  height: px;
+  padding: 40px;
+  border: 5px solid black;
+  top: 200px;
+  left: 600px;
+}
+#mydiv6 {
+  display: none;
+  position: absolute;
+  width: px;
+  height: px;
+  padding: 40px;
+  border: 5px solid black;
+  top: 200px;
+  left: 600px;
+}
+
+.crop {
+  position: absolute;
+  top: 270px;
+  left: 270px;
+}
+#gallery .thumbnail {
+  position: absolute;
+  width: 800px;
+  height: 450px;
+  left: 560px;
+  top: 139px;
+}
+
+#gallery .thumbnail img {
+  width: 800px;
+  height: 450px;
+}
+
+#gallery .thumbnail video {
+  width: 800px;
+  height: 450px;
+}
+
+#input-btn .input-btn {
+  position: absolute;
+  top: 10px;
+  left: 270px;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+label {
+  color: #fff;
+  height: 40px;
+  width: 200px;
+  background-color: cadetblue;
+  position: absolute;
+  border-radius: 5px;
+  align-content: center;
+}
+
+div.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 0 auto;
+  background: cadetblue;
+  color: #fff;
+}
+#canvas {
+  position: absolute;
+  widows: 800px;
+  height: 450px;
+}
