@@ -246,23 +246,22 @@
 
             dragElement(document.getElementById(idTag));
 
-            //px
-            document.getElementById(idTag).style.width = numpx / 10;
-            document.getElementById(idTag).style.height = num2px / 10;
+
+            document.getElementById(idTag).style.width = numpx / 10 + "px";
+            document.getElementById(idTag).style.height = num2px / 10 + "px";
             document.getElementById(idTag).style.display = "block";
 
-            screen_ip_address = document.getElementById("ip_address").value;
-            //screen_width = document.getElementById(idTag).style.width;
-            //screen_height = document.getElementById(idTag).style.height;
+            screen_ip_address = document.getElementById("ip_address").value;;
             screen_width = document.getElementById("width").value ;
             screen_height = document.getElementById("height").value;
+            //screen_diagonal = document.getElementById("diagonal").value;
             screen_name = document.getElementById("nametext").value;
             
-            if ( screen_ip_address1 == null){
+           /*if (screen_ip_address1 == null){
                 alert("hay ip");
             }
             screen_width1 = screen_width;
-            console.log("tag" , screen_name+" "+ count +" : "+ screen_width1);
+            console.log("tag" , screen_name+" "+ count +" : "+ screen_width1);*/
             /*global.push(document.getElementById(idTag).style);
             console.log(global);*/
             setValue();
@@ -278,19 +277,18 @@
         function setValue(){
             if(screen_ip_address1 == null){
                 //alert(idTag + screen_ip_address + screen_width + screen_height + screen_diagonal + screen_name);
-             
                 screen_ip_address1 = screen_ip_address;
                 screen_width1 = screen_width;
                 screen_height1 = screen_height;
                 screen_name1 = screen_name;
-                alert("hey ip 1"+ screen_ip_address1 + " : "+ screen_width1+" : "+ screen_height1 + " : "+screen_name1);
+                alert("hey ip 1 "+ screen_ip_address1 + " : " + screen_width1 + " : "+ screen_height1 + " : "+screen_name1);
             }else{
                 //alert(idTag + screen_ip_address + screen_width + screen_height + screen_diagonal + screen_name);
                 screen_ip_address2 = screen_ip_address;
                 screen_width2 = screen_width;
                 screen_height2 = screen_height;
                 screen_name2 = screen_name;
-                alert("hey ip 2"+ screen_ip_address2 + " : "+ screen_width2+" : "+ screen_height2 + " : "+screen_name2);
+                alert("hey ip 2 "+ screen_ip_address2 + " : "+ screen_width2+" : "+ screen_height2 + " : "+screen_name2);
             }
         }
 
@@ -365,21 +363,19 @@
 
                 screen1.ip_address = screen_ip_address1;
                 screen1.screen_name = screen_name1;
-                screen1.screen_width = screen_width1;
-                screen1.screen_height = screen_height1;
-                screen1.screen_diagonal = screen_diagonal1;
+                screen1.screen_width = screen_width1 * 37.79;
+                screen1.screen_height = screen_height1  * 37.79;
                 screen1.initial_xtop = x1;
                 screen1.initial_yleft = y1;
 
                 screen2.ip_address = screen_ip_address2;
                 screen2.screen_name = screen_name2;
-                screen2.screen_width = screen_width2;
-                screen2.screen_height = screen_height2;
-                screen2.screen_diagonal = screen_diagonal2;
+                screen2.screen_width = screen_width2  * 37.79;
+                screen2.screen_height = screen_height2  * 37.79;
                 screen2.initial_xtop = x2;
                 screen2.initial_yleft = y2;
 
-            //setn to server.js
+
             $.ajax({
                 type: "POST",
                 url: "http://localhost:5000/save",
@@ -388,12 +384,16 @@
                 "ip_address":  screen1.ip_address,
                 "screen_name": screen1.screen_name,
                 "screen_width": screen1.screen_width,
-                "screen_height": screen1.screen_height  
+                "screen_height": screen1.screen_height,
+                "initial_x": screen1.initial_xtop,
+                "initial_y": screen1.initial_yleft    
                 }, "div2" : {
                 "ip_address":  screen2.ip_address,
                 "screen_name": screen2.screen_name,
                 "screen_width": screen2.screen_width,
-                "screen_height": screen2.screen_height 
+                "screen_height": screen2.screen_height,
+                "initial_x": screen2.initial_xtop,
+                "initial_y": screen2.initial_yleft    
                 }},
                 success: function(data){
                     alert("Success!");
@@ -402,25 +402,8 @@
                     //show error message
                     alert('text status '+textStatus+', err '+err)
                 }
-            });
-
-
-
-
-                /*alert("mydiv1" + "\n" + "X1: " + x1 + "\n" + "Y1: " + y1 + "\n" + "Screen Name: "  + screen_name1  + "\n" + "Ip_Address " + screen_ip_address1 +
-                    "\n" + "Width: " + screen_width1 + "\n" + "Height: " + screen_height1 + "\n" + "Diagonal: " + screen_diagonal1 + "\n" + "\n" + "mydiv2" + "\n" +
-                    "X2: " + x2 + "\n" + "Y2: " + y2  + "\n" + "Screen Name: "  + screen_name2  + "\n" + "Ip_Address " + screen_ip_address2 +
-                    "\n" + "Width: " + screen_width2 + "\n" + "Height: " + screen_height2 + "\n" + "Diagonal: " + screen_diagonal2);*/
-                
+            });     
             }
-        /*function printScreenDetail(){
-            console.log("HEllo");
-        }
-        module.exports.print = printScreenDetail();*/
-
-
-
-
     </script>
     <script>
     </script>

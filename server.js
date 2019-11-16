@@ -48,11 +48,26 @@ app.get("/", function(req, res) {
 });
 
 app.post("/save", function(req, res) {
+  var screens = {};
+  console.log("-------------------------------------------");
+  console.log(screens);
   console.log("-------------------------------------------");
   console.log(req.body.div1);
   console.log(req.body.div2);
   console.log("req received");
-  console.log("-------------------------------------------");
+  //connect to Python Server
+  /*var client = new net.Socket();
+  client.connect(60000, "10.26.250.224", function(err, results) {
+    if (err) throw err;
+    console.log("Connected");
+    client.on("data", function(data) {
+      console.log("Received: " + data);
+      client.write("back-end");
+      //sent(JSON object) to python server
+      client.emit;
+    });
+  });*/
+  //still redirect main.
   res.redirect("/main");
 });
 
