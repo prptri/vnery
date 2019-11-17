@@ -66,6 +66,8 @@
         var screen_diagonal2 = 0;
         var screen_name1 = '';
         var screen_name2 = '';
+        var fileName;
+        
         
         //value to store the initial points of each screens
         var x1 = 0, y1 = 0, x2 = 0, y2 = 0, x3 = 0, y3 = 0;
@@ -120,11 +122,8 @@
                             + Add Screen
                             <i class="fas fa-long-arrow-alt-right pl-2"></i>
                         </a>
-
-                        <!--form method="POST" action="http://localhost:5000/save"-->
+                            <!-- <input placeholder="Please Enter The Preset Name!" type="text" id="preset_name"> -->
                             <button id="save" type="submit" class="btn btn-primary" onclick="Save()" >Save</button>
-                        <!--/form-->
-                        
                     </div>
                 </h5>
             </div>
@@ -165,6 +164,12 @@
     <!--Upload file into canvas-->
     <div id="gallery"></div>
     <script>
+        $(document).ready(function(){
+        $('input[type="file"]').change(function(e){
+            fileName = e.target.files[0].name;
+            alert('The file "' + fileName +  '" has been selected.');
+            });
+        });
         var uploadfiles = document.querySelector('#fileinput');
         uploadfiles.addEventListener('change', function () {
             var files = this.files;
@@ -212,7 +217,7 @@
 
 
     <center>
-        <canvas id="myCanvas" width="800" height="450" style="border:5px solid #d3d3d3;">
+        <canvas id="myCanvas" width="854" height="480" style="border:5px solid #d3d3d3;">
         </canvas>
         <h6> 3840 × 2160 </h6>
         <!--- <img id="scream" width="800" height="450" src="img/city.jpg" alt="The Scream" style="border:5px solid #4E5C5D; top: 130px;>
@@ -238,8 +243,8 @@
             document.getElementById("crop").appendChild(node);
 
             var ip_address_passing = document.getElementById("ip_address").value;
-            var numpx = document.getElementById("width").value * 90;
-            var num2px = document.getElementById("height").value * 90;
+            var numpx = document.getElementById("width").value * 48.95;
+            var num2px = document.getElementById("height").value * 48.95;
             //var num3px = document.getElementById("diagonal").value * 37.79;
             var name = document.getElementById("nametext").value;
             console.log("tag", document.getElementById(idTag));
@@ -247,9 +252,10 @@
             dragElement(document.getElementById(idTag));
 
 
-            document.getElementById(idTag).style.width = numpx / 10 + "px";
-            document.getElementById(idTag).style.height = num2px / 10 + "px";
+            document.getElementById(idTag).style.width = numpx/10  + "px";
+            document.getElementById(idTag).style.height = num2px/10  + "px";
             document.getElementById(idTag).style.display = "block";
+            alert(document.getElementById(idTag).style.width );
 
             screen_ip_address = document.getElementById("ip_address").value;;
             screen_width = document.getElementById("width").value ;
@@ -332,8 +338,8 @@
                 elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
                 elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
 
-                t = (((elmnt.offsetTop - pos2 - 138) * 2160) / 450);
-                l = (((elmnt.offsetLeft - pos1 - 271) * 3840) / 800);
+                t = (((elmnt.offsetTop - pos2 - 138)*3840)/854) ;
+                l = (((elmnt.offsetLeft - pos1 - 245)*2160)/480) ;
                 name = document.getElementById("nametext").value;
                 //document.getElementById("mydivheader" + elmnt.id).innerHTML = "x: " + t + " \n" + "y: " + l + " \n ";
             }
@@ -360,7 +366,6 @@
         }
 
         function Save() {
-
                 screen1.ip_address = screen_ip_address1;
                 screen1.screen_name = screen_name1;
                 screen1.screen_width = screen_width1 * 37.79;
@@ -386,15 +391,18 @@
                 "screen_width": screen1.screen_width,
                 "screen_height": screen1.screen_height,
                 "initial_x": screen1.initial_xtop,
-                "initial_y": screen1.initial_yleft    
+                "initial_y": screen1.initial_yleft,
+                "playfile": fileName    
                 }, "div2" : {
                 "ip_address":  screen2.ip_address,
                 "screen_name": screen2.screen_name,
                 "screen_width": screen2.screen_width,
                 "screen_height": screen2.screen_height,
                 "initial_x": screen2.initial_xtop,
-                "initial_y": screen2.initial_yleft    
-                }},
+                "initial_y": screen2.initial_yleft,
+                "playfile": fileName     
+                },
+            },
                 success: function(data){
                     alert("Success!");
                 },

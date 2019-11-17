@@ -7,9 +7,9 @@
 #mydiv {
   display: none;
   position: absolute;
-  width: 100px;
+  width: 500px;
   color: white;
-  height: 200px;
+  height: 300px;
   padding: 40px;
   border: 5px solid black;
 }
@@ -84,18 +84,18 @@
   position: absolute;
   width: 800px;
   height: 450px;
-  left: 560px;
+  left: 245px;
   top: 139px;
 }
 
 #gallery .thumbnail img {
-  width: 800px;
-  height: 450px;
+  width: 854px;
+  height: 480px;
 }
 
 #gallery .thumbnail video {
-  width: 800px;
-  height: 450px;
+  width: 854px;
+  height: 480px;
 }
 
 #input-btn .input-btn {

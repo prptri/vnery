@@ -1,15 +1,16 @@
 const express = require("express");
 const path = require("path");
 const app = express();
-const connection = require("./db_connection");
+const db_connection = require("./db_connection");
 //const exphbs = require("express-handlebars");
 const bodyParser = require("body-parser");
 const net = require("net");
-const pyPORT = 60000;
-const pyHOST = "10.26.250.224";
+// TO CONNECT TO PYTHON
 const client = new net.Socket();
+//db_connection.connect();
+//console.log("");
 
-client.connect(60000, "10.26.250.224", function(err, results) {
+client.connect(60000, "192.168.43.89", function(err, results) {
   if (err) throw err;
   console.log("Connected");
   client.on("data", function(data) {
@@ -62,10 +63,10 @@ app.post("/save", function(req, res) {
   //var screens = {};
   var screen1 = req.body.div1;
   var screen2 = req.body.div2;
-  //screens = { screen1, screen2 };
+  console.log(screen1);
+  console.log(screen2);
   var sc1 = JSON.stringify(screen1);
   var sc2 = JSON.stringify(screen2);
-  //var sc2 = JSON.stringify(screen2);
   client.write(sc1);
   console.log(screen1);
   setTimeout(function() {
@@ -73,17 +74,8 @@ app.post("/save", function(req, res) {
   }, 10000);
   client.write(sc2);
   console.log(screen2);
-  // console.log(screens.screen1.ip_address);
-  /*var screenlist = [];
-  console.log("-------------------------------------------");
-  console.log("-------------------------------------------");
-  console.log("req received!");
-  screenlist.push(JSON.stringify(req.body.div1));
-  screenlist.push(req.body.div2);
-  console.log(screenlist[0]);*/
-  //sent(JSON object) to python server
 
-  //still redirect main.
+  //redirect to main.
   res.redirect("/main");
 });
 
