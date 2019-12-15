@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- Bootstrap CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css2/style.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        var count = 1;
+        var t, l, num;
+        var num,num2,num3,name;
+        var idTag;
+
+    
+        var screen1 = {
+        preset_id: 1,
+        prset_status: true,
+        ip_address: "",
+        screen_name: "",
+        screen_width: 0,
+        screen_height: 0,
+        screen_diagonal: 0,
+        initial_xtop: 0,
+        initial_yleft: 0
+        };
+
+        var screen2 = {
+        preset_id: 1,
+        prset_status: true,
+        ip_address: "",
+        screen_name: "",
+        screen_width: 0,
+        screen_height: 0,
+        screen_diagonal: 0,
+        initial_xtop: 0,
+        initial_yleft: 0
+        };
+
+        //value to store the details of each screens
+        var screen_ip_address1;
+        var screen_ip_address2;
+        var screen_width1 = 0;
+        var screen_width2 = 0; 
+        var screen_height1 = 0;
+        var screen_height2 = 0;
+        var screen_diagonal1 = 0;
+        var screen_diagonal2 = 0;
+        var screen_name1 = '';
+        var screen_name2 = '';
+        var fileName;
+        
+        
+        //value to store the initial points of each screens
+        var x1 = 0, y1 = 0, x2 = 0, y2 = 0, x3 = 0, y3 = 0;
+    </script>
+</head>
+
+
+<body>
+    <!--<video autoplay muted loop id="myVideo">
+        <source src="vdo/bg.mp4" type="video/mp4">
+
+        </video>-->
+    <nav class="navbar navbar-header navbar-expand-lg navbar navbar-dark bg-dark">
+
+        <div class="container">
+
+            <a class="navbar-brand" href="#">V N E R Y</a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <ul class="navbar-nav mr-auto">
+
+                    <li class="nav-item">
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container pt-3 pb-3">
+        <div class="row">
+            <div class="col-12">
+                <h5 class="d-flex">
+                    <input type="file" id="fileinput" method="post" enctype="multipart/form-data">
+                    <label for="fileinput" id="previous-asset-button" class="btn btn-long btn-outline-dark"><i
+                            class="material-icons">
+                            perm_media
+                        </i>
+                        Choose file
+                    </label>
+                    <div class="ml-auto">
+                        <a id="next-asset-button" class="btn btn-long btn-outline-dark" data-toggle="modal"
+                            data-target="#myModal" href="#"><i class="material-icons">
+                            </i>
+                            + Add Screen
+                            <i class="fas fa-long-arrow-alt-right pl-2"></i>
+                        </a>
+                            <!-- <input placeholder="Please Enter The Preset Name!" type="text" id="preset_name"> -->
+                            <button id="save" type="submit" class="btn btn-primary" onclick="Save()" >Save</button>
+                    </div>
+                </h5>
+            </div>
+        </div>
+    </div>
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Screen Info</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <p><strong>Pi Ip_address</strong></p>
+                    <input class="btn btn-long btn-outline-dark" type="text" id="ip_address">
+                    <p><strong>Screen Name</strong></p>
+                    <input class="btn btn-long btn-outline-dark" type="text" id="nametext">
+                    <p><strong>Screen Width</strong></p>
+                    <input class="btn btn-long btn-outline-dark" type="number" id="width">
+                    <p><strong>Screen Height</strong></p>
+                    <input class="btn btn-long btn-outline-dark" type="number" id="height">
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="onClick()">Apply</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!--Upload file into canvas-->
+    <div id="gallery"></div>
+    <script>
+        $(document).ready(function(){
+        $('input[type="file"]').change(function(e){
+            fileName = e.target.files[0].name;
+            alert('The file "' + fileName +  '" has been selected.');
+            });
+        });
+        var uploadfiles = document.querySelector('#fileinput');
+        uploadfiles.addEventListener('change', function () {
+            var files = this.files;
+            for (var i = 0; i < files.length; i++) {
+                previewImage(this.files[i]);
+            }
+        }, false);
+        function previewImage(file) {
+            var galleryId = "gallery";
+            var gallery = document.getElementById(galleryId);
+            var imageType = /image.*/;
+            var videoType = /video.*/;
+
+            //document.getElementsByTagName("img").style.display = "none";
+             if (!file.type.match(videoType)) {
+                //document.getElementsByTagName("imageType").style.display = "none";
+                }
+            var thumb = document.createElement("div");
+            thumb.classList.add('thumbnail'); // Add the class thumbnail to the created div
+
+                if(!file.type.match(videoType)){
+            var img = document.createElement("img");
+            img.file = file;
+            thumb.appendChild(img);
+            gallery.appendChild(thumb);
+            var reader = new FileReader();
+            reader.onload = (function (aImg) { return function (e) { aImg.src = e.target.result; }; })(img);
+           reader.readAsDataURL(file);
+
+                }
+                else{
+
+            var vdo = document.createElement("video");
+            vdo.file = file;
+            thumb.appendChild(vdo);
+            gallery.appendChild(thumb);
+            var reader = new FileReader();
+            reader.onload = (function (avdo) { return function (e) { avdo.src = e.target.result; }; })(vdo);
+            reader.readAsDataURL(file);
+                }
+
+        }
+
+    </script>
+
+
+    <center>
+        <canvas id="myCanvas" width="854" height="480" style="border:5px solid #d3d3d3;">
+        </canvas>
+        <h6> 3840 × 2160 </h6>
+        <!--- <img id="scream" width="800" height="450" src="img/city.jpg" alt="The Scream" style="border:5px solid #4E5C5D; top: 130px;>
+        <script>
+            window.onload = function () {
+                var c = document.getElementById(" myCanvas"); var ctx=c.getContext("2d"); var
+            img=document.getElementById("scream"); ctx.drawImage(img, 5, 500); } </script> <h6> 3840 × 2160 </h6>-->
+    </center>
+
+    <ul id="crop">
+    </ul>
+    <script type="text/javascript">
+        //function onClick()
+        function onClick() {
+            idTag = "mydiv" + count;
+            var node = document.createElement("li");
+            var child = document.createElement("div");
+            var textNode = document.createTextNode(idTag);
+            child.setAttribute("id", "mydivheader" + idTag);
+            node.setAttribute("id", idTag);
+            child.appendChild(textNode);
+            node.appendChild(child);
+            document.getElementById("crop").appendChild(node);
+
+            var ip_address_passing = document.getElementById("ip_address").value;
+            var numpx = document.getElementById("width").value * 48.95;
+            var num2px = document.getElementById("height").value * 48.95;
+            //var num3px = document.getElementById("diagonal").value * 37.79;
+            var name = document.getElementById("nametext").value;
+            console.log("tag", document.getElementById(idTag));
+
+            dragElement(document.getElementById(idTag));
+
+
+            document.getElementById(idTag).style.width = numpx/10  + "px";
+            document.getElementById(idTag).style.height = num2px/10  + "px";
+            document.getElementById(idTag).style.display = "block";
+            alert(document.getElementById(idTag).style.width );
+
+            screen_ip_address = document.getElementById("ip_address").value;;
+            screen_width = document.getElementById("width").value ;
+            screen_height = document.getElementById("height").value;
+            //screen_diagonal = document.getElementById("diagonal").value;
+            screen_name = document.getElementById("nametext").value;
+            
+           /*if (screen_ip_address1 == null){
+                alert("hay ip");
+            }
+            screen_width1 = screen_width;
+            console.log("tag" , screen_name+" "+ count +" : "+ screen_width1);*/
+            /*global.push(document.getElementById(idTag).style);
+            console.log(global);*/
+            setValue();
+            count++;
+
+            /*var tag = document.getElementById(idTag);
+            tag.addEventListener('dblclick', function (e) {
+                alert("IP_Address: " + screen_ip_address +"\n" + "Screen Name: " + " " + screen_name + "\n" + "Screen Width: " + screen_width + " " + "Centimeter" + "\n" + "Screen Height: " + screen_height + " Centimeter" + 
+                     "\n" + "Diagonal: " + " " + screen_diagonal + " " + "Centimeter" + "\n");
+            });*/
+        }
+
+        function setValue(){
+            if(screen_ip_address1 == null){
+                //alert(idTag + screen_ip_address + screen_width + screen_height + screen_diagonal + screen_name);
+                screen_ip_address1 = screen_ip_address;
+                screen_width1 = screen_width;
+                screen_height1 = screen_height;
+                screen_name1 = screen_name;
+                alert("hey ip 1 "+ screen_ip_address1 + " : " + screen_width1 + " : "+ screen_height1 + " : "+screen_name1);
+            }else{
+                //alert(idTag + screen_ip_address + screen_width + screen_height + screen_diagonal + screen_name);
+                screen_ip_address2 = screen_ip_address;
+                screen_width2 = screen_width;
+                screen_height2 = screen_height;
+                screen_name2 = screen_name;
+                alert("hey ip 2 "+ screen_ip_address2 + " : "+ screen_width2+" : "+ screen_height2 + " : "+screen_name2);
+            }
+        }
+
+        //Make the DIV element draggagle:
+        dragElement(document.getElementById(idTag));
+
+        function dragElement(elmnt) {
+            //var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+            if (document.getElementById(elmnt.id + "header" + idTag)) {
+                /* if present, the header is where you move the DIV from:*/
+                document.getElementById(elmnt.id + "header" + idTag).onmousedown = dragMouseDown;
+            } else {
+                /* otherwise, move the DIV from anywhere inside the DIV:*/
+                elmnt.onmousedown = dragMouseDown;
+            }
+
+            function dragMouseDown(e) {
+                e = e || window.event;
+                e.preventDefault();
+                // get the mouse cursor position at startup:
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                document.onmouseup = closeDragElement;
+                // call a function whenever the cursor moves:
+                document.onmousemove = elementDrag;
+                
+            }
+
+            function elementDrag(e) {
+                e = e || window.event;
+                e.preventDefault();
+                // calculate the new cursor position:
+                //pos3 = e.clientX;
+                //pos4 = e.clientY;
+                pos1 = pos3 - e.clientX;
+                pos2 = pos4 - e.clientY;
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+
+                // set the element's new position:
+                elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+                elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+
+                t = (((elmnt.offsetTop - pos2 - 138)*3840)/854) ;
+                l = (((elmnt.offsetLeft - pos1 - 245)*2160)/480) ;
+                name = document.getElementById("nametext").value;
+                //document.getElementById("mydivheader" + elmnt.id).innerHTML = "x: " + t + " \n" + "y: " + l + " \n ";
+            }
+
+            function closeDragElement() {
+                /* stop moving when mouse button is released:*/
+                document.onmouseup = null;
+                document.onmousemove = null;
+                if(elmnt.id == "mydiv1"){
+                    x1 = l;
+                    y1 = t;
+                    alert(elmnt.id + "\n" + "X: " + l + "\n" + "Y: " + t + "\n" + "Screen Name: "  + screen_name1  + "\n" + "Ip_Address " + screen_ip_address1 +
+                    "\n" + "Width: " + screen_width1 + "\n" + "Height: " + screen_height1 + "\n");
+
+                }
+                else if(elmnt.id == "mydiv2"){
+                    x2 = l;
+                    y2 = t;
+                    alert(elmnt.id + "\n" + "X: " + l + "\n" + "Y: " + t  + "\n" + "Screen Name: "  + screen_name2  + "\n" + "Ip_Address " + screen_ip_address2 +
+                    "\n" + "Width: " + screen_width2 + "\n" + "Height: " + screen_height2 + "\n");
+                }
+            }
+
+        }
+
+        function Save() {
+                screen1.ip_address = screen_ip_address1;
+                screen1.screen_name = screen_name1;
+                screen1.screen_width = screen_width1 * 37.79;
+                screen1.screen_height = screen_height1  * 37.79;
+                screen1.initial_xtop = x1;
+                screen1.initial_yleft = y1;
+
+                screen2.ip_address = screen_ip_address2;
+                screen2.screen_name = screen_name2;
+                screen2.screen_width = screen_width2  * 37.79;
+                screen2.screen_height = screen_height2  * 37.79;
+                screen2.initial_xtop = x2;
+                screen2.initial_yleft = y2;
+
+
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:5000/save",
+                timeout: 5000,
+                data: {"div1" : {
+                "ip_address":  screen1.ip_address,
+                "screen_name": screen1.screen_name,
+                "screen_width": screen1.screen_width,
+                "screen_height": screen1.screen_height,
+                "initial_x": screen1.initial_xtop,
+                "initial_y": screen1.initial_yleft,
+                "playfile": fileName    
+                }, "div2" : {
+                "ip_address":  screen2.ip_address,
+                "screen_name": screen2.screen_name,
+                "screen_width": screen2.screen_width,
+                "screen_height": screen2.screen_height,
+                "initial_x": screen2.initial_xtop,
+                "initial_y": screen2.initial_yleft,
+                "playfile": fileName     
+                },
+            },
+                success: function(data){
+                    alert("Success!");
+                },
+                error: function(jqXHR, textStatus, err) {
+                    //show error message
+                    alert('text status '+textStatus+', err '+err)
+                }
+            });     
+            }
+    </script>
+    <script>
+    </script>
+
+</body>
+</html>
